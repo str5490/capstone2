@@ -1,0 +1,6 @@
+# files related to the virtual environment
+bin/
+include/
+lib/
+share/
+pyvenv.cfg
