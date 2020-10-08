@@ -14,6 +14,6 @@ ap.add_argument("-t", "--text", default = '테스트중입니다.',
 args = vars(ap.parse_args())
 
 tts = gTTS(text = args["text"], lang = args["lang"])
-m_mpfile = args["path"] + '\\' + args["name"] + ".mp3"
+m_mpfile = args["path"] + '/' + args["name"] + ".mp3"
 tts.save(m_mpfile)
 playsound(m_mpfile)
