@@ -4,6 +4,7 @@ cap = cv2.VideoCapture(0) # 0 or -1
 
 while cap.isOpened():
 	ret, img = cap.read()
+    prev_img = cv2.copy(img)
 
 	if ret:
 		cv2.imshow('camera-o', img)
