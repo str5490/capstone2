@@ -12,7 +12,7 @@ while True:
     try:  #an error comes if it does not find anything in window as it cannot find contour of max area
           #therefore this try error statement
         _, frame = cap.read()
-        frame = cv2.flip(frame, 1)
+        frame = cv2.flip(frame, 0)
         frame = frame.copy()
 
         if prev_prev_frame is None :
