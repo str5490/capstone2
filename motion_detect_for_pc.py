@@ -9,10 +9,9 @@ cv2.namedWindow('frame')
 cap = cv2.VideoCapture(0)
 
 while True:
-    try:  #an error comes if it does not find anything in window as it cannot find contour of max area
-          #therefore this try error statement
+    try: 
         _, frame = cap.read()
-        frame = cv2.flip(frame, 0)
+        frame = cv2.flip(frame, 1)
         frame = frame.copy()
 
         if prev_prev_frame is None :
@@ -22,16 +21,23 @@ while True:
             prev_prev_frame = prev_frame.copy()
             prev_frame = frame.copy()
             continue
-
+        '''
+        cv2.imshow("now", frame)
+        cv2.imshow("prev", prev_frame)
+        cv2.imshow("prev_prev", prev_prev_frame)
+        '''
         frameDelta1 = cv2.absdiff(frame, prev_frame)
         frameDelta2 = cv2.absdiff(frame, prev_prev_frame)
         frameDelta = frameDelta1 + frameDelta2
+        cv2.imshow("frameDelta", frameDelta)
+
         prev_prev_frame = prev_frame.copy()
         prev_frame = frame.copy()
-        
+
         gray = cv2.cvtColor(frameDelta, cv2.COLOR_BGR2GRAY)
         gray = cv2.GaussianBlur(gray, (21, 21), 0)
         active = cv2.threshold(gray, 10, 255, cv2.THRESH_BINARY)[1]
+        cv2.imshow("active", active)
 
         kernel = np.ones((3, 3), np.uint8) 
         mask = cv2.dilate(active, kernel, iterations = 5)
@@ -40,7 +46,7 @@ while True:
         frame = cv2.add(frame, red_mask)
         
         areacnt = np.sum(active)
-        if areacnt < 100000:
+        if areacnt < 1000000:
             cv2.putText(frame, 'not detected', (0, 50), font, 2, (0, 0, 255), 3, cv2.LINE_AA)
         else:
             cv2.putText(frame, 'detected', (0, 50), font, 2, (0, 0, 255), 3, cv2.LINE_AA)
