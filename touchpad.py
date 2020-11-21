@@ -12,9 +12,9 @@ root.bind('<Escape>', lambda e: root.destroy())
 window_wth, window_hgh = root.winfo_screenwidth(), root.winfo_screenheight()
 large_font = ('Verdana', int(window_hgh / 12))
 button_hgh = int(window_hgh / 8)
-button_wth = int(window_wth / 3.5)
-pady = (window_hgh - int(button_hgh * 7)) / 10
-padx = (window_wth - int(button_wth * 3)) / 7
+button_wth = int(window_wth / 4)
+pady = (window_hgh - int(button_hgh * 7)) / 21
+padx = (window_wth - int(button_wth * 3)) / 11
 
 def button_pressed(value):
     if value == 'AC':
